@@ -13,11 +13,11 @@ HƯỚNG DẪN - đọc rồi XÓA TOÀN BỘ các khối chú thích này sau k
 
 | | |
 | --- | --- |
-| Họ và tên | ___ |
-| MSSV | ___ |
+| Họ và tên | Lưu Xuân Dũng |
+| MSSV | 230101774 |
 | Lớp / Khóa | K4 |
-| Repo GitHub | <https://github.com/___/>___ |
-| Ngày nộp | ___ |
+| Repo GitHub | https://github.com/1usuzu/K4-Track2-Day21-01774-LuuXuanDung |
+| Ngày nộp | 21/08/2026 |
 
 ---
 
@@ -43,40 +43,19 @@ Tập dữ liệu Adult có phân bố lớp mất cân bằng nghiêm trọng k
 
 ## 3. Khó Khăn Gặp Phải và Cách Giải Quyết
 
-<!-- Nêu 2 - 3 khó khăn thật, mỗi ô một câu ngắn. -->
-
 | Khó khăn | Nguyên nhân | Cách giải quyết |
 | --- | --- | --- |
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
-| ___ | ___ | ___ |
+| Lỗi Permission denied khi SSH bằng file `.pem` | Quyền file trên Windows bị thừa kế mở rộng khiến OpenSSH từ chối key. | Dùng lệnh `icacls` trên Windows để thu hồi quyền thừa kế và chỉ cấp quyền đọc cho user hiện tại. |
+| Lỗi unpickle model khi restart service trên EC2 | Lệch phiên bản `scikit-learn` giữa GitHub Actions (1.4.2) và VM (1.9.0). | Cài đặt chính xác phiên bản `scikit-learn==1.4.2` trên VM và khởi động lại service. |
+| Lỗi đường dẫn key trong Git Bash | Git Bash hiểu ký tự gạch chéo ngược `\` thành escape character. | Sử dụng định dạng đường dẫn gạch chéo xuôi `/` chuẩn Unix (`~/.ssh/...`). |
 
 ---
 
 ## 4. So Sánh Bước 2 và Bước 3 (bắt buộc, 2 - 3 câu)
 
-<!-- Lấy số liệu từ bảng ở mục 3.6 của tasks/buoc-3.md. -->
-
 | | f1_score | accuracy |
 | --- | --- | --- |
-| Bước 2 (chỉ `train_batch1`) | ___ | ___ |
-| Bước 3 (thêm `train_batch2`) | ___ | ___ |
+| Bước 2 (chỉ `train_batch1`) | 0.7149 | 0.8740 |
+| Bước 3 (thêm `train_batch2`) | 0.7354 | 0.8820 |
 
-**Nhận xét:** ___
-
-<!--
-Một câu trả lời trung thực kiểu "f1 giảm 0,01 vì dữ liệu mới cùng phân phối, không mang
-thêm thông tin mới" được đánh giá cao hơn kết luận sai rằng thêm dữ liệu luôn tốt hơn.
--->
-
----
-
-## 5. Phần Bonus Đã Thực Hiện (nếu có)
-
-<!-- Xóa cả mục 5 nếu không làm bonus. Mỗi bonus tối đa 1 dòng. -->
-
-- [ ] Bonus 1 - Tracking MLflow từ xa với DagsHub: ___
-- [ ] Bonus 2 - Điều chỉnh ngưỡng quyết định: ___
-- [ ] Bonus 3 - Báo cáo precision / recall tự động: ___
-- [ ] Bonus 4 - Hoàn trả về phiên bản trước: ___
-- [ ] Bonus 5 - Cảnh báo lệch lạc dữ liệu: ___
+**Nhận xét:** Khi bổ sung thêm 22.361 mẫu dữ liệu mới, `f1_score` tăng nhẹ từ 0.7149 lên 0.7354 (+0.0205) và accuracy tăng từ 0.8740 lên 0.8820. Do dữ liệu mới có cùng phân phối với dữ liệu cũ nên mức tăng là vừa phải, song đã chứng minh toàn bộ chu trình Continuous Training tự động kích hoạt và triển khai mô hình mới thành công khi có commit dữ liệu.
