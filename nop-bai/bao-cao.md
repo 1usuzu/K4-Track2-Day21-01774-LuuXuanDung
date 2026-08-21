@@ -12,53 +12,32 @@ HƯỚNG DẪN - đọc rồi XÓA TOÀN BỘ các khối chú thích này sau k
 -->
 
 | | |
-|---|---|
+| --- | --- |
 | Họ và tên | ___ |
 | MSSV | ___ |
 | Lớp / Khóa | K4 |
-| Repo GitHub | https://github.com/___/___ |
+| Repo GitHub | <https://github.com/___/>___ |
 | Ngày nộp | ___ |
 
 ---
 
 ## 1. Bộ Siêu Tham Số Đã Chọn và Lý Do
 
-<!-- Khoảng 120 - 150 từ. Điền kết quả thật từ MLflow UI ở Bước 1, tối thiểu 3 lần chạy. -->
-
 | Lần chạy | n_estimators | learning_rate | max_depth | f1_score | accuracy |
-|---|---|---|---|---|---|
-| 1 | ___ | ___ | ___ | ___ | ___ |
-| 2 | ___ | ___ | ___ | ___ | ___ |
-| 3 | ___ | ___ | ___ | ___ | ___ |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 100 | 0.1 | 3 | 0.7109 | 0.8780 |
+| 2 | 50 | 0.05 | 2 | 0.6051 | 0.8460 |
+| 3 | 200 | 0.1 | 5 | 0.7149 | 0.8740 |
 
-**Bộ siêu tham số đã chọn:** `n_estimators=___`, `learning_rate=___`, `max_depth=___`.
+**Bộ siêu tham số đã chọn:** `n_estimators=200`, `learning_rate=0.1`, `max_depth=5`.
 
-**Lý do:** ___
-
-<!--
-Trả lời trong phần Lý do:
-  - Vì sao bộ này tốt hơn các bộ còn lại (dựa trên f1_score, không phải accuracy)?
-  - Lần chạy có accuracy cao nhất có trùng với lần có f1_score cao nhất không?
-    Nếu không, điều đó nói lên điều gì?
-  - Bạn quan sát thấy đánh đổi nào giữa n_estimators và learning_rate?
--->
+**Lý do:** Bộ siêu tham số ở lần chạy 3 đạt `f1_score` cao nhất (0.7149), vượt ngưỡng chất lượng 0.65. Lần chạy 1 có accuracy cao nhất (0.8780 > 0.8740) nhưng f1_score lại thấp hơn (0.7109 < 0.7149), chứng minh accuracy cao chưa phản ánh khả năng nhận diện lớp thiểu số tốt. Việc tăng `n_estimators` lên 200 kết hợp `max_depth=5` giúp mô hình nắm bắt tốt hơn các quan hệ phi tuyến, khắc phục hiện tượng underfitting ở lần chạy 2 (`f1_score=0.6051`).
 
 ---
 
 ## 2. Vì Sao Ngưỡng Chất Lượng Đặt Trên F1 Chứ Không Phải Accuracy
 
-<!-- Khoảng 120 - 150 từ. -->
-
-___
-
-<!--
-Cần nêu được:
-  - Phân bố lớp của tập dữ liệu (tỷ lệ lớp thu nhập > 50K) và hệ quả của nó.
-  - Accuracy của một mô hình luôn trả lời "thu nhập thấp" là bao nhiêu, vì sao con số
-    đó gây hiểu nhầm.
-  - F1 của lớp dương đo điều gì mà accuracy không đo được.
-  - Vì sao KHÔNG dùng average="weighted" hay average="macro" khi gọi f1_score.
--->
+Tập dữ liệu Adult có phân bố lớp mất cân bằng nghiêm trọng khi nhóm thu nhập cao (>50K) chỉ chiếm 24.8%. Một mô hình vô dụng luôn dự đoán "thu nhập thấp" cho mọi mẫu vẫn đạt accuracy 75.2% nhưng có `f1_score` bằng 0 do hoàn toàn bỏ sót lớp dương. Chỉ số F1 của lớp dương là trung bình điều hòa giữa Precision và Recall, đo lường chính xác năng lực phát hiện đúng đối tượng thu nhập cao. Khi tính toán, tuyệt đối không dùng `average="macro"` hoặc `average="weighted"` vì các trọng số này sẽ bị lớp đa số (75.2%) chi phối làm sai lệch ngưỡng chất lượng.
 
 ---
 
@@ -67,7 +46,7 @@ Cần nêu được:
 <!-- Nêu 2 - 3 khó khăn thật, mỗi ô một câu ngắn. -->
 
 | Khó khăn | Nguyên nhân | Cách giải quyết |
-|---|---|---|
+| --- | --- | --- |
 | ___ | ___ | ___ |
 | ___ | ___ | ___ |
 | ___ | ___ | ___ |
@@ -79,7 +58,7 @@ Cần nêu được:
 <!-- Lấy số liệu từ bảng ở mục 3.6 của tasks/buoc-3.md. -->
 
 | | f1_score | accuracy |
-|---|---|---|
+| --- | --- | --- |
 | Bước 2 (chỉ `train_batch1`) | ___ | ___ |
 | Bước 3 (thêm `train_batch2`) | ___ | ___ |
 
